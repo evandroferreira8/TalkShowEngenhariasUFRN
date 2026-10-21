@@ -508,3 +508,28 @@ body.no-scroll .floating-top-link{opacity:0;visibility:hidden;pointer-events:non
 @media(prefers-reduced-motion:reduce){
   .lightbox-download{transition:none}
 }
+
+/* Acabamento da auditoria — rótulos e foco contrastante */
+:focus-visible{outline-color:#244b91}
+.site-header a:focus-visible,.site-header button:focus-visible,
+.hero a:focus-visible,.gallery-section button:focus-visible,
+.gallery-section a:focus-visible,.lightbox :focus-visible,
+.quote-section a:focus-visible,.site-footer a:focus-visible{outline-color:#dff36c}
+.intro-caption{font-size:13px}
+.thesis-label{font-size:13px;letter-spacing:1.1px;line-height:1.5}
+.hero-side{font-size:13px}
+.scroll-cue{font-size:13px;line-height:1.45;min-height:44px;display:inline-flex;align-items:center}
+.hero-foot-note{font-size:13px}
+@media(max-width:920px){
+  .brand-name small{font-size:11px}
+  .intro-caption,.thesis-label{font-size:12px;line-height:1.45}
+  .hero-side>span:last-child{font-size:12px}
+  .scroll-cue{font-size:12px;letter-spacing:.6px;min-height:44px}
+  .gallery-heading-wrap .kicker{font-size:12px}
+  .hero-circle span{font-size:12px}
+}
+@media(max-width:660px){
+  .brand-name small{font-size:11px}
+  .hero-topline>span:last-child{font-size:11px}
+  .gallery-photo .photo-caption{font-size:12.5px}
+}
