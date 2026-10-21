@@ -398,3 +398,12 @@ body.no-scroll .floating-top-link{opacity:0;visibility:hidden;pointer-events:non
   .floating-top-link{transition:none;transform:none}
   .floating-top-link:hover{transform:none}
 }
+
+/* Reforço mobile: botão sempre sobre o conteúdo após rolagem */
+body.scrolled-page .floating-top-link{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
+body.no-scroll .floating-top-link{opacity:0;visibility:hidden;pointer-events:none}
+@media(max-width:660px){
+  .floating-top-link{position:fixed!important;right:14px!important;bottom:calc(20px + env(safe-area-inset-bottom,0px))!important;z-index:9999!important;width:54px;height:54px;min-width:54px;min-height:54px;display:flex;align-items:center;justify-content:center;background:#dff36c;color:#101a27;border:2px solid #101a27;border-radius:50%;box-shadow:0 7px 23px rgba(5,13,24,.35)}
+  .floating-top-link.is-visible,body.scrolled-page .floating-top-link{opacity:1;visibility:visible;pointer-events:auto;transform:none}
+  .floating-top-arrow{font-size:27px}
+}
