@@ -121,3 +121,22 @@ if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-moti
  const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}});},{threshold:.09,rootMargin:'0px 0px -10px 0px'});
  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 }else{document.querySelectorAll('.reveal').forEach(el=>el.classList.add('is-visible'));}
+
+/* Mostrar o atalho apenas após começar a descer a página. */
+const floatingTopLink=document.getElementById('floating-top-link');
+if(floatingTopLink){
+  let topLinkFrame=false;
+  const updateFloatingTopLink=()=>{
+    const visible=window.scrollY>320;
+    floatingTopLink.classList.toggle('is-visible',visible);
+  };
+  window.addEventListener('scroll',()=>{
+    if(topLinkFrame)return;
+    topLinkFrame=true;
+    requestAnimationFrame(()=>{
+      updateFloatingTopLink();
+      topLinkFrame=false;
+    });
+  },{passive:true});
+  updateFloatingTopLink();
+}
