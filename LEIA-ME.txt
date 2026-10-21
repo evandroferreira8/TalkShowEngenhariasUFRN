@@ -1,0 +1,25 @@
+I TALK SHOW DAS ENGENHARIAS — SITE EXPOSITIVO (PROTÓTIPO)
+
+Abra index.html no navegador. O site funciona como site estático sem
+instalação. Para testar, basta descompactar o ZIP e abrir esse arquivo.
+
+CONTÉM
+- Página editorial com narrativa do evento.
+- Seção das conversas mencionadas na matéria do Portal da UFRN.
+- Galeria com as 20 fotografias fornecidas, filtros, ampliação e navegação.
+- Design adaptável para computadores e celulares.
+- Imagens em WebP compactadas, com versões de prévia.
+- Estrutura sem bibliotecas ou serviços obrigatórios.
+
+FONTE JORNALÍSTICA
+https://www.ufrn.br/imprensa/noticias/106881/talk-show-das-engenharias-aproxima-universidade-mercado-e-inovacao
+
+ANTES DE PUBLICAR
+1. Confirmar créditos das fotografias e autorização de divulgação das imagens.
+2. Confirmar as marcas e o modo de apresentação dos parceiros institucionais.
+3. Revisar nomes e cargos citados, com o organizador do evento.
+4. Validar a identidade visual e a redação final.
+5. Publicar somente após aprovação.
+
+Observação: fontes externas usadas no layout dependem da internet; o site
+continua legível com fontes alternativas se estiver offline.
