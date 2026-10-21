@@ -16,8 +16,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261021b">
-  <script src="script.js?v=20261021b" defer></script>
+  <link rel="stylesheet" href="style.css?v=20261021-acessibilidade">
+  <script src="script.js?v=20261021-acessibilidade" defer></script>
 </head>
 <body>
   <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
@@ -88,7 +88,7 @@
             <p>O <strong>I Talk Show das Engenharias</strong> conectou pesquisa, inovação, energia e empreendedorismo em conversas que foram além da sala de aula.</p>
             <a class="text-link" href="#ideias">Conheça as conversas <span aria-hidden="true">↗</span></a>
           </div>
-          <div class="intro-collage reveal" aria-label="Dois registros fotográficos do evento">
+          <div class="intro-collage reveal" role="group" aria-label="Dois registros fotográficos do evento">
             <div class="intro-collage-main photo-clip"><img src="assets/photos/talkshow-03.webp" onerror="this.onerror=null;this.src='assets/photos/img_8172.webp'" alt="Participantes acompanham e dialogam durante o Talk Show" loading="lazy" decoding="async"></div>
             <div class="intro-collage-secondary photo-clip"><img src="assets/photos/talkshow-02.webp" onerror="this.onerror=null;this.src='assets/photos/img_8064.webp'" alt="Apresentação de guitarra na abertura do encontro" loading="lazy" decoding="async"></div>
             <span class="intro-caption">DO PALCO À PLATEIA <span>↗</span></span>
@@ -143,7 +143,8 @@
       <div class="frame quote-inner reveal">
         <span class="quote-top">A IDEIA POR TRÁS DO ENCONTRO <span>✳</span></span>
         <span class="quote-glyph" aria-hidden="true">“</span>
-        <blockquote id="quote-heading">Nossa ideia foi proporcionar uma conversa que fosse <em>além dos conteúdos apresentados em sala de aula.</em></blockquote>
+        <h2 class="sr-only" id="quote-heading">A ideia por trás do encontro</h2>
+        <blockquote>Nossa ideia foi proporcionar uma conversa que fosse <em>além dos conteúdos apresentados em sala de aula.</em></blockquote>
         <p class="quote-credit">ÂNGELO ANDERSON DE OLIVEIRA <span>— Organizador · PPgEP/UFRN</span></p>
       </div>
     </section>
@@ -165,7 +166,8 @@
           <span class="gallery-counter" id="gallery-counter" aria-live="polite">26 FOTOGRAFIAS</span>
         </div>
         <div class="gallery-grid" id="gallery-grid" aria-live="off"><p>Carregando o acervo fotográfico…</p></div>
-        <p class="gallery-note">Selecione uma fotografia para ampliar e navegar pelo acervo.</p>
+        <p class="gallery-note">Selecione uma fotografia para ampliar e baixar a versão em alta resolução.</p>
+        <p class="gallery-credit">Fotografias: <strong>Rodrigo Melo</strong> · Download em WebP otimizado, até 1.920 px no lado maior.</p>
       </div>
     </section>
 
@@ -193,7 +195,7 @@
       </div>
       <div class="footer-bottom">
         <span>ORGANIZAÇÃO · ÂNGELO ANDERSON DE OLIVEIRA / PPgEP/UFRN</span>
-        <span>UM ACERVO DA EDIÇÃO 2026</span>
+        <span>FOTOGRAFIAS: RODRIGO MELO</span>
         <a href="#topo">VOLTAR AO TOPO ↑</a>
       </div>
     </div>
@@ -205,9 +207,15 @@
   </a>
 
   <dialog id="lightbox" class="lightbox" aria-label="Visualizador de fotografias">
-    <div class="lightbox-bar"><span class="lightbox-count" id="lightbox-count">01 / 26</span><button type="button" id="lightbox-close" class="lightbox-close" aria-label="Fechar fotografia">Fechar <span aria-hidden="true">×</span></button></div>
+    <div class="lightbox-bar">
+      <span class="lightbox-count" id="lightbox-count" aria-live="polite">01 / 26</span>
+      <div class="lightbox-actions">
+        <a class="lightbox-download" id="lightbox-download" href="#" download aria-label="Baixar fotografia em alta resolução"> <span aria-hidden="true">↓</span> <span class="download-label">Baixar em alta resolução</span></a>
+        <button type="button" id="lightbox-close" class="lightbox-close" aria-label="Fechar fotografia">Fechar <span aria-hidden="true">×</span></button>
+      </div>
+    </div>
     <div class="lightbox-stage"><button class="lightbox-prev" id="lightbox-prev" type="button" aria-label="Fotografia anterior">←</button><img id="lightbox-img" alt=""><button class="lightbox-next" id="lightbox-next" type="button" aria-label="Próxima fotografia">→</button></div>
-    <p class="lightbox-caption" id="lightbox-caption"></p>
+    <div class="lightbox-details"><p class="lightbox-caption" id="lightbox-caption"></p><p class="lightbox-attribution">Fotografia: <strong>Rodrigo Melo</strong> <span>· Arquivo WebP em alta resolução, otimizado para web.</span></p></div>
   </dialog>
 <!-- Fallback de visibilidade do botão no celular, independente das outras interações -->
   <script>
