@@ -108,6 +108,13 @@ toggle.addEventListener('click',()=>{
   document.body.classList.toggle('no-scroll',next);
 });
 mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+// Fecha a navegação móvel com Escape, preservando o foco no botão.
+document.addEventListener('keydown',event=>{
+ if(event.key==='Escape' && !mobileNav.hidden && !lightbox.open){
+   closeMenu();
+   toggle.focus();
+ }
+});
 window.addEventListener('resize',()=>{if(window.innerWidth>920&&!mobileNav.hidden)closeMenu();});
 
 const progress=document.getElementById('scroll-progress');
