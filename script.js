@@ -35,6 +35,7 @@ const lightbox = document.getElementById('lightbox');
 const photoView = document.getElementById('lightbox-img');
 const photoCaption = document.getElementById('lightbox-caption');
 const photoCount = document.getElementById('lightbox-count');
+const photoDownload = document.getElementById('lightbox-download');
 let visiblePhotos = photos;
 let photoIndex = 0;
 let lastTrigger = null;
@@ -63,7 +64,11 @@ function renderPhotos(filter='todos'){
 }
 function updatePhoto(){
   const photo=visiblePhotos[photoIndex];if(!photo)return;
-  photoView.src=urlFor(photo);photoView.alt=photo.caption;
+  const largePhotoUrl=urlFor(photo);
+  photoView.src=largePhotoUrl;photoView.alt=photo.caption;
+  photoDownload.href=largePhotoUrl;
+  photoDownload.download=`Talk-Show-das-Engenharias_Rodrigo-Melo_${photo.id}.webp`;
+  photoDownload.setAttribute('aria-label',`Baixar em alta resolução: ${photo.caption}; fotografia de Rodrigo Melo`);
   photoCaption.textContent=photo.caption;
   photoCount.textContent=`${String(photoIndex+1).padStart(2,'0')} / ${String(visiblePhotos.length).padStart(2,'0')}`;
 }
