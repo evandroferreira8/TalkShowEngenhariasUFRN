@@ -1,6 +1,12 @@
 'use strict';
 
 const photos = [
+  {id:'talkshow-01', caption:'Retrato coletivo da primeira edição do Talk Show das Engenharias', categories:['pessoas'], layout:'big',pos:'center 40%'},
+  {id:'talkshow-02', caption:'Abertura do encontro com música e apresentação', categories:['palco','bastidores'], layout:'wide',pos:'center 40%'},
+  {id:'talkshow-03', caption:'Público reunido para acompanhar as apresentações', categories:['pessoas'], layout:'wide',pos:'center 52%'},
+  {id:'talkshow-04', caption:'Rodrigo Santiago e os caminhos da engenharia', categories:['palco'], layout:'wide',pos:'center 44%'},
+  {id:'talkshow-05', caption:'Robson Matos debate energia e petróleo', categories:['palco'], layout:'wide',pos:'center 40%'},
+  {id:'talkshow-06', caption:'Renata Braga encerra o encontro com inovação e pesquisa', categories:['palco'], layout:'wide',pos:'center 45%'},
   {id:'8188', caption:'A engenharia em diálogo com o público', categories:['pessoas','palco'], layout:'big', pos:'54% center'},
   {id:'8064', caption:'A música na abertura do evento', categories:['bastidores'], layout:'wide',pos:'center 53%'},
   {id:'8071', caption:'Chegada e acolhimento dos participantes', categories:['bastidores','pessoas'], layout:'tall',pos:'center 35%'},
@@ -32,7 +38,7 @@ const photoCount = document.getElementById('lightbox-count');
 let visiblePhotos = photos;
 let photoIndex = 0;
 let lastTrigger = null;
-function urlFor(photo, small=false){return `assets/photos/img_${photo.id}${small?'-sm':''}.webp`;}
+function urlFor(photo, small=false){return `assets/photos/${String(photo.id).startsWith('talkshow-')?photo.id:'img_'+photo.id}${small?'-sm':''}.webp`;}
 function renderPhotos(filter='todos'){
   visiblePhotos = photos.filter(photo=>filter==='todos'||photo.categories.includes(filter));
   grid.innerHTML='';
