@@ -16,8 +16,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="style.css?v=20261021b">
+  <script src="script.js?v=20261021b" defer></script>
 </head>
 <body>
   <a href="#conteudo" class="skip-link">Pular para o conteúdo</a>
@@ -209,5 +209,24 @@
     <div class="lightbox-stage"><button class="lightbox-prev" id="lightbox-prev" type="button" aria-label="Fotografia anterior">←</button><img id="lightbox-img" alt=""><button class="lightbox-next" id="lightbox-next" type="button" aria-label="Próxima fotografia">→</button></div>
     <p class="lightbox-caption" id="lightbox-caption"></p>
   </dialog>
+<!-- Fallback de visibilidade do botão no celular, independente das outras interações -->
+  <script>
+  (function(){
+    var topLink=document.getElementById('floating-top-link');
+    if(!topLink)return;
+    function refreshTop(){
+      var y=window.scrollY || window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      var visible=y>240;
+      topLink.classList.toggle('is-visible',visible);
+      document.body.classList.toggle('scrolled-page',visible);
+    }
+    window.addEventListener('scroll',refreshTop,{passive:true});
+    document.addEventListener('scroll',refreshTop,{passive:true,capture:true});
+    window.addEventListener('touchend',refreshTop,{passive:true});
+    window.addEventListener('pageshow',refreshTop);
+    window.addEventListener('load',refreshTop);
+    refreshTop();
+  })();
+  </script>
 </body>
 </html>
