@@ -15,6 +15,7 @@
   <title>I Talk Show das Engenharias | Especial LabTam/UFRN</title>
   <link rel="stylesheet" href="style.css?v=20261106-redesign">
   <link rel="stylesheet" href="refinamento.css?v=20261106-2">
+  <link rel="stylesheet" href="acabamento.css?v=20261106-3">
   <script src="script.js?v=20261106-redesign" defer></script>
 </head>
 <body>
@@ -194,6 +195,10 @@
           <span class="gallery-counter" id="gallery-counter" aria-live="polite">26 FOTOGRAFIAS</span>
         </div>
         <div class="gallery-grid" id="gallery-grid"><p class="gallery-loading">Carregando fotografias…</p></div>
+        <div class="gallery-footer" id="gallery-footer">
+          <p class="gallery-progress" aria-live="polite">Exibindo <strong id="gallery-visible-count">0</strong> de <strong id="gallery-total-count">26</strong> fotografias</p>
+          <button id="gallery-more" class="gallery-more" type="button" aria-controls="gallery-grid" aria-expanded="false" hidden>Ver todas as fotografias <span aria-hidden="true">↓</span></button>
+        </div>
         <p class="gallery-note">Fotografias: <strong>Rodrigo Melo</strong> · Arquivos em WebP otimizado, até 1.920 px no lado maior.</p>
       </div>
     </section>
@@ -234,7 +239,7 @@
     </div>
   </footer>
 
-  <a class="floating-top-link" id="floating-top-link" href="#topo" aria-label="Voltar ao topo da página" title="Voltar ao topo"><span class="floating-top-arrow" aria-hidden="true">↑</span><span class="floating-top-label" aria-hidden="true">TOPO</span></a>
+  <button class="floating-top-link" id="floating-top-link" type="button" aria-label="Voltar ao início da página" title="Voltar ao início"><span class="floating-top-arrow" aria-hidden="true">↑</span><span class="floating-top-label" aria-hidden="true">TOPO</span></button>
 
   <dialog id="lightbox" class="lightbox" aria-label="Visualizador de fotografias">
     <div class="lightbox-bar">
