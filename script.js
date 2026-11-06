@@ -188,6 +188,13 @@ const floatingTopLink=document.getElementById('floating-top-link');
 if(floatingTopLink){
   const updateFloatingTopLink=()=>{
     floatingTopLink.classList.toggle('is-visible',window.scrollY>220);
+    // Em celulares, o visor pode ser menor que a largura/altura de layout
+    // (barras do navegador, zoom e teclado virtual). Fixar no visor real.
+    const visual=window.visualViewport;
+    const rightInset=visual?Math.max(0,window.innerWidth-visual.offsetLeft-visual.width):0;
+    const bottomInset=visual?Math.max(0,window.innerHeight-visual.offsetTop-visual.height):0;
+    floatingTopLink.style.right=`calc(${Math.ceil(rightInset+16)}px + env(safe-area-inset-right, 0px))`;
+    floatingTopLink.style.bottom=`calc(${Math.ceil(bottomInset+16)}px + env(safe-area-inset-bottom, 0px))`;
   };
   floatingTopLink.addEventListener('click',()=>{
     if(!mobileNav.hidden)closeMenu();
@@ -200,5 +207,9 @@ if(floatingTopLink){
   window.addEventListener('scroll',updateFloatingTopLink,{passive:true});
   window.addEventListener('pageshow',updateFloatingTopLink);
   window.addEventListener('resize',updateFloatingTopLink,{passive:true});
+  if(window.visualViewport){
+    window.visualViewport.addEventListener('resize',updateFloatingTopLink,{passive:true});
+    window.visualViewport.addEventListener('scroll',updateFloatingTopLink,{passive:true});
+  }
   updateFloatingTopLink();
 }
