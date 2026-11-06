@@ -45,7 +45,7 @@ let photoIndex = 0;
 let lastTrigger = null;
 function urlFor(photo, small=false){return `assets/photos/${String(photo.id).startsWith('talkshow-')?photo.id:'img_'+photo.id}${small?'-sm':''}.webp`;}
 function initialGalleryLimit(){
-  return window.matchMedia('(max-width: 700px)').matches ? 8 : 12;
+  return window.matchMedia('(max-width: 700px)').matches ? 6 : 10;
 }
 function drawGallery(){
   const total=visiblePhotos.length;
