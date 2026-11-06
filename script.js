@@ -183,6 +183,20 @@ if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-moti
  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 }else{document.querySelectorAll('.reveal').forEach(el=>el.classList.add('is-visible'));}
 
+/* Retorno ao topo: aciona a rolagem diretamente, mantendo a âncora como alternativa. */
+function scrollToPageTop(event){
+  if(event && typeof event.preventDefault==='function')event.preventDefault();
+  if(!mobileNav.hidden)closeMenu();
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  try{
+    window.scrollTo({top:0,left:0,behavior:reduced?'auto':'smooth'});
+  }catch(error){
+    window.scrollTo(0,0);
+  }
+}
+const footerBackTop=document.querySelector('.footer-back-top');
+if(footerBackTop)footerBackTop.addEventListener('click',scrollToPageTop);
+
 /* Controle explícito para voltar ao topo; não depende do hash de navegação. */
 const floatingTopLink=document.getElementById('floating-top-link');
 if(floatingTopLink){
@@ -199,14 +213,7 @@ if(floatingTopLink){
     floatingTopLink.style.right=`calc(${Math.ceil(rightInset+16)}px + env(safe-area-inset-right, 0px))`;
     floatingTopLink.style.bottom=`calc(${Math.ceil(bottomInset+16)}px + env(safe-area-inset-bottom, 0px))`;
   };
-  floatingTopLink.addEventListener('click',()=>{
-    if(!mobileNav.hidden)closeMenu();
-    window.scrollTo({
-      top:0,
-      left:0,
-      behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'
-    });
-  });
+  floatingTopLink.addEventListener('click',scrollToPageTop);
   window.addEventListener('scroll',updateFloatingTopLink,{passive:true});
   window.addEventListener('pageshow',updateFloatingTopLink);
   window.addEventListener('resize',updateFloatingTopLink,{passive:true});
