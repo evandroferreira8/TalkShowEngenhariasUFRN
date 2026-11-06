@@ -189,7 +189,7 @@ function scrollToPageTop(event){
   if(!mobileNav.hidden)closeMenu();
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   try{
-    window.scrollTo({top:0,left:0,behavior:reduced?'instant':'smooth'});
+    window.scrollTo({top:0,left:0,behavior:reduced?'auto':'smooth'});
   }catch(error){
     window.scrollTo(0,0);
   }
