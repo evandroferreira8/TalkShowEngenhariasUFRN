@@ -2,7 +2,7 @@
 
 const photos = [
   {id:'talkshow-01', caption:'Retrato coletivo da primeira edição do Talk Show das Engenharias', categories:['pessoas'], layout:'big',pos:'center 40%'},
-  {id:'talkshow-02', caption:'Abertura do encontro com música e apresentação', categories:['palco','bastidores'], layout:'wide',pos:'center 40%'},
+  {id:'talkshow-02', caption:'Ângelo Anderson de Oliveira, organizador do Talk Show das Engenharias', categories:['palco','pessoas'], layout:'wide',pos:'center 40%'},
   {id:'talkshow-03', caption:'Público reunido para acompanhar as apresentações', categories:['pessoas'], layout:'wide',pos:'center 52%'},
   {id:'talkshow-04', caption:'Rodrigo Santiago e os caminhos da engenharia', categories:['palco'], layout:'wide',pos:'center 44%'},
   {id:'talkshow-05', caption:'Robson Matos debate energia e petróleo', categories:['palco'], layout:'wide',pos:'center 40%'},
