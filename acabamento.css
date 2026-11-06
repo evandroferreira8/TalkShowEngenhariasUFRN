@@ -868,3 +868,83 @@ main,section,.frame {min-width:0}
     text-align:left;
   }
 }
+
+/* Rodapé: a marca acompanha exatamente o centro vertical do título. */
+.footer-main {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(215px,300px);
+  grid-template-rows:auto auto auto;
+  align-items:start;
+  column-gap:clamp(34px,5vw,76px);
+  row-gap:0;
+  padding-bottom:30px;
+}
+.footer-main > .footer-label {
+  grid-column:1;
+  grid-row:1;
+  margin:0 0 12px;
+}
+.footer-main > .footer-title {
+  display:block;
+  grid-column:1;
+  grid-row:2;
+  margin:0;
+  font:700 clamp(33px,3.2vw,45px)/1.07 var(--headline);
+  letter-spacing:-.047em;
+  color:#fff;
+}
+.footer-main > .footer-title span {display:block}
+.footer-main > .footer-tagline {
+  grid-column:1;
+  grid-row:3;
+  margin:14px 0 0;
+  color:#d2e3f3;
+  font-size:13px;
+  line-height:1.5;
+}
+.footer-main > .footer-institution {
+  grid-column:2;
+  grid-row:2;
+  align-self:center;
+  justify-content:flex-end;
+  width:100%;
+  height:auto;
+  min-height:0;
+  padding:6px 0 6px 34px;
+  margin:0;
+  border-left:1px solid rgba(255,255,255,.26);
+  text-align:right;
+}
+.footer-main > .footer-institution img {
+  width:210px;
+  max-width:100%;
+  height:auto;
+}
+.footer-back-top {cursor:pointer}
+@media(max-width:760px) {
+  .footer-main {
+    grid-template-columns:minmax(0,1fr);
+    grid-template-rows:auto auto auto auto;
+    row-gap:0;
+    padding-bottom:24px;
+  }
+  .footer-main > .footer-label {grid-column:1;grid-row:1}
+  .footer-main > .footer-title {
+    grid-column:1;
+    grid-row:2;
+    font-size:clamp(29px,8.5vw,42px);
+  }
+  .footer-main > .footer-tagline {grid-column:1;grid-row:3}
+  .footer-main > .footer-institution {
+    grid-column:1;
+    grid-row:4;
+    justify-content:flex-start;
+    align-self:start;
+    padding:20px 0 0;
+    margin-top:19px;
+    border-left:0;
+    border-top:1px solid rgba(255,255,255,.18);
+    text-align:left;
+  }
+  .footer-main > .footer-institution img {width:165px}
+}
