@@ -37,31 +37,80 @@ const photoCaption = document.getElementById('lightbox-caption');
 const photoCount = document.getElementById('lightbox-count');
 const photoDownload = document.getElementById('lightbox-download');
 let visiblePhotos = photos;
+let expandedPhotos = false;
+const galleryMore = document.getElementById('gallery-more');
+const galleryVisibleCount = document.getElementById('gallery-visible-count');
+const galleryTotalCount = document.getElementById('gallery-total-count');
 let photoIndex = 0;
 let lastTrigger = null;
 function urlFor(photo, small=false){return `assets/photos/${String(photo.id).startsWith('talkshow-')?photo.id:'img_'+photo.id}${small?'-sm':''}.webp`;}
-function renderPhotos(filter='todos'){
-  visiblePhotos = photos.filter(photo=>filter==='todos'||photo.categories.includes(filter));
-  grid.innerHTML='';
+function initialGalleryLimit(){
+  return window.matchMedia('(max-width: 700px)').matches ? 6 : 10;
+}
+function drawGallery(){
+  const total=visiblePhotos.length;
+  const current=expandedPhotos?visiblePhotos:visiblePhotos.slice(0,initialGalleryLimit());
   const frag=document.createDocumentFragment();
-  visiblePhotos.forEach((photo,i)=>{
+  current.forEach((photo,i)=>{
     const button=document.createElement('button');
     button.type='button';
-    button.className=`gallery-photo ${photo.layout}`;
-    button.setAttribute('aria-label',`Ampliar fotografia: ${photo.caption}`);
+    button.className='gallery-photo'+(i===0?' is-feature':'');
+    button.setAttribute('aria-label',`Ampliar fotografia ${i+1} de ${total}: ${photo.caption}`);
+    const media=document.createElement('span');
+    media.className='photo-media';
     const img=document.createElement('img');
     img.src=urlFor(photo,true);
-    img.loading='lazy';img.decoding='async';img.alt=photo.caption;
+    img.loading=i<3?'eager':'lazy';
+    img.decoding='async';
+    img.alt=photo.caption;
     img.style.objectPosition=photo.pos;
-    const caption=document.createElement('span');caption.className='photo-caption';caption.textContent=photo.caption;
-    const icon=document.createElement('span');icon.className='photo-icon';icon.textContent='↗';icon.setAttribute('aria-hidden','true');
-    button.append(img,caption,icon);
+    img.addEventListener('error',()=>{
+      const full=urlFor(photo);
+      if(img.src!==full)img.src=full;
+    },{once:true});
+    const photoNumber=document.createElement('span');
+    photoNumber.className='photo-number';
+    photoNumber.textContent=String(i+1).padStart(2,'0');
+    photoNumber.setAttribute('aria-hidden','true');
+    const icon=document.createElement('span');
+    icon.className='photo-icon';
+    icon.textContent='↗';
+    icon.setAttribute('aria-hidden','true');
+    media.append(img,photoNumber,icon);
+    const caption=document.createElement('span');
+    caption.className='photo-caption';
+    caption.textContent=photo.caption;
+    button.append(media,caption);
     button.addEventListener('click',()=>openPhoto(i,button));
     frag.append(button);
   });
-  grid.append(frag);
-  count.textContent=`${String(visiblePhotos.length).padStart(2,'0')} ${visiblePhotos.length===1?'FOTOGRAFIA':'FOTOGRAFIAS'}`;
+  grid.replaceChildren(frag);
+  count.textContent=`${String(total).padStart(2,'0')} ${total===1?'FOTOGRAFIA':'FOTOGRAFIAS'}`;
+  galleryVisibleCount.textContent=String(current.length);
+  galleryTotalCount.textContent=String(total);
+  galleryMore.hidden=total<=initialGalleryLimit();
+  galleryMore.setAttribute('aria-expanded',String(expandedPhotos));
+  galleryMore.innerHTML=expandedPhotos
+    ? 'Mostrar menos fotografias <span aria-hidden="true">↑</span>'
+    : 'Ver todas as fotografias <span aria-hidden="true">↓</span>';
 }
+function renderPhotos(filter='todos'){
+  visiblePhotos=photos.filter(photo=>filter==='todos'||photo.categories.includes(filter));
+  expandedPhotos=false;
+  drawGallery();
+}
+galleryMore.addEventListener('click',()=>{
+  expandedPhotos=!expandedPhotos;
+  drawGallery();
+});
+let galleryMobile=window.matchMedia('(max-width: 700px)').matches;
+window.addEventListener('resize',()=>{
+  const mobile=window.matchMedia('(max-width: 700px)').matches;
+  if(mobile!==galleryMobile && !expandedPhotos){
+    galleryMobile=mobile;
+    drawGallery();
+  } else {galleryMobile=mobile;}
+},{passive:true});
 function updatePhoto(){
   const photo=visiblePhotos[photoIndex];if(!photo)return;
   const largePhotoUrl=urlFor(photo);
@@ -134,21 +183,22 @@ if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-moti
  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 }else{document.querySelectorAll('.reveal').forEach(el=>el.classList.add('is-visible'));}
 
-/* Mostrar o atalho apenas após começar a descer a página. */
+/* Controle explícito para voltar ao topo; não depende do hash de navegação. */
 const floatingTopLink=document.getElementById('floating-top-link');
 if(floatingTopLink){
-  let topLinkFrame=false;
   const updateFloatingTopLink=()=>{
-    const visible=window.scrollY>320;
-    floatingTopLink.classList.toggle('is-visible',visible);
+    floatingTopLink.classList.toggle('is-visible',window.scrollY>220);
   };
-  window.addEventListener('scroll',()=>{
-    if(topLinkFrame)return;
-    topLinkFrame=true;
-    requestAnimationFrame(()=>{
-      updateFloatingTopLink();
-      topLinkFrame=false;
+  floatingTopLink.addEventListener('click',()=>{
+    if(!mobileNav.hidden)closeMenu();
+    window.scrollTo({
+      top:0,
+      left:0,
+      behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'
     });
-  },{passive:true});
+  });
+  window.addEventListener('scroll',updateFloatingTopLink,{passive:true});
+  window.addEventListener('pageshow',updateFloatingTopLink);
+  window.addEventListener('resize',updateFloatingTopLink,{passive:true});
   updateFloatingTopLink();
 }
