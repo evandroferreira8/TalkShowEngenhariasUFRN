@@ -186,8 +186,11 @@ if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-moti
 /* Controle explícito para voltar ao topo; não depende do hash de navegação. */
 const floatingTopLink=document.getElementById('floating-top-link');
 if(floatingTopLink){
+  const footerCredits=document.querySelector('.footer-bottom');
   const updateFloatingTopLink=()=>{
-    floatingTopLink.classList.toggle('is-visible',window.scrollY>220);
+    // Oculta o botão flutuante quando o rodapé já oferece o link de topo.
+    const creditsVisible=footerCredits && footerCredits.getBoundingClientRect().top<window.innerHeight-18;
+    floatingTopLink.classList.toggle('is-visible',window.scrollY>220 && !creditsVisible);
     // Em celulares, o visor pode ser menor que a largura/altura de layout
     // (barras do navegador, zoom e teclado virtual). Fixar no visor real.
     const visual=window.visualViewport;
